@@ -1,8 +1,8 @@
 /* eslint-disable no-console,func-names,react/no-multi-comp */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactDragListView from 'react-drag-listview/src/index.js';
-import './index.less';
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactDragListView from "react-drag-listview/src/index.js";
+import "./index.less";
 
 class Demo extends React.Component {
   constructor(props) {
@@ -27,8 +27,8 @@ class Demo extends React.Component {
         data.splice(toIndex, 0, item);
         that.setState({ data });
       },
-      nodeSelector: 'li',
-      handleSelector: 'a'
+      nodeSelector: "li",
+      handleSelector: "a"
     };
 
     return (
@@ -42,7 +42,7 @@ class Demo extends React.Component {
                   {item.title}
                   <a href="#">Drag</a>
                 </li>
-            ))}
+              ))}
             </ol>
           </ReactDragListView>
         </div>
@@ -51,4 +51,4 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById("__react-content"));

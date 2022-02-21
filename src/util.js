@@ -1,10 +1,13 @@
 /* global Element */
 
-if (typeof Element !== 'undefined' && !Element.prototype.matches) {
+if (typeof Element !== "undefined" && !Element.prototype.matches) {
   var proto = Element.prototype;
-  proto.matches = proto.matchesSelector ||
-      proto.mozMatchesSelector || proto.msMatchesSelector ||
-      proto.oMatchesSelector || proto.webkitMatchesSelector;
+  proto.matches =
+    proto.matchesSelector ||
+    proto.mozMatchesSelector ||
+    proto.msMatchesSelector ||
+    proto.oMatchesSelector ||
+    proto.webkitMatchesSelector;
 }
 
 const closest = function(el, selector, rootNode) {
@@ -26,10 +29,13 @@ const getScrollElement = function(el) {
   let element = el;
   do {
     const { overflow } = window.getComputedStyle(element);
-    if ((overflow === 'auto' || overflow === 'scroll')
-        && (element && element.nodeType
-            && (element.offsetWidth < element.scrollWidth
-                || element.offsetHeight < element.scrollHeight))) {
+    if (
+      (overflow === "auto" || overflow === "scroll") &&
+      element &&
+      element.nodeType &&
+      (element.offsetWidth < element.scrollWidth ||
+        element.offsetHeight < element.scrollHeight)
+    ) {
       break;
     }
     if (!element || !element.nodeType || element === document.body) {
@@ -43,7 +49,7 @@ const getScrollElement = function(el) {
 
 const getDomIndex = function(el, ignoreSelectors) {
   return Array.from(el.parentNode.children)
-    .filter(e => (ignoreSelectors === '' ? true : !e.matches(ignoreSelectors)))
+    .filter(e => (ignoreSelectors === "" ? true : !e.matches(ignoreSelectors)))
     .indexOf(el);
 };
 

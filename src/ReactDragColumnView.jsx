@@ -1,8 +1,9 @@
-import ReactDragListView from './ReactDragListView';
+import ReactDragListView from "./ReactDragListView";
 
-const UNIT_PX = 'px';
-const DRAG_LIND_STYLE = 'width:0;margin-left:-1px;margin-top:0;' +
-                        'border-bottom:0 none;border-left:dashed 2px red;';
+const UNIT_PX = "px";
+const DRAG_LIND_STYLE =
+  "width:0;margin-left:-1px;margin-top:105px;" +
+  "border-bottom:0 none;border-left:dashed 2px red;";
 const DIRECTIONS = {
   RIGHT: 2,
   LEFT: 4
@@ -12,7 +13,10 @@ class ReactDragColumnView extends ReactDragListView {
   getDragLine() {
     if (!this.dragLine) {
       super.getDragLine();
-      this.dragLine.setAttribute('style', this.dragLine.getAttribute('style') + DRAG_LIND_STYLE);
+      this.dragLine.setAttribute(
+        "style",
+        this.dragLine.getAttribute("style") + DRAG_LIND_STYLE
+      );
     }
     return this.dragLine;
   }
@@ -26,9 +30,9 @@ class ReactDragColumnView extends ReactDragListView {
     const { pageX } = e;
     const compatibleWidth = (targetWidth * 2) / 3;
     this.direction = 0;
-    if (pageX > ((left + width) - compatibleWidth)) {
+    if (pageX > left + width - compatibleWidth) {
       this.direction = DIRECTIONS.RIGHT;
-    } else if (pageX < (left + compatibleWidth)) {
+    } else if (pageX < left + compatibleWidth) {
       this.direction = DIRECTIONS.LEFT;
     }
     if (this.direction) {
@@ -59,23 +63,26 @@ class ReactDragColumnView extends ReactDragListView {
 
   fixDragLine(target) {
     const dragLine = this.getDragLine();
-    if (!target || this.state.fromIndex < 0
-        || this.state.fromIndex === this.state.toIndex) {
+    if (
+      !target ||
+      this.state.fromIndex < 0 ||
+      this.state.fromIndex === this.state.toIndex
+    ) {
       this.hideDragLine();
       return;
     }
-    const {
-      left, top, width, height
-    } = target.getBoundingClientRect();
-    const lineLeft = (this.state.toIndex < this.state.fromIndex
-      ? left
-      : (left + width));
+    const { left, top, width, height } = target.getBoundingClientRect();
+    const lineLeft =
+      this.state.toIndex < this.state.fromIndex ? left : left + width;
     if (this.props.enableScroll && this.scrollElement) {
       const {
         width: scrollWidth,
         left: scrollLeft
       } = this.scrollElement.getBoundingClientRect();
-      if (lineLeft < (scrollLeft - 2) || lineLeft > (scrollLeft + scrollWidth + 2)) {
+      if (
+        lineLeft < scrollLeft - 2 ||
+        lineLeft > scrollLeft + scrollWidth + 2
+      ) {
         this.hideDragLine();
         return;
       }
@@ -83,7 +90,7 @@ class ReactDragColumnView extends ReactDragListView {
     dragLine.style.top = top + UNIT_PX;
     dragLine.style.height = height + UNIT_PX;
     dragLine.style.left = lineLeft + UNIT_PX;
-    dragLine.style.display = 'block';
+    dragLine.style.display = "block";
   }
 }
 
